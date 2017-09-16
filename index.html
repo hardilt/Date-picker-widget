@@ -12,9 +12,9 @@
 		<p class="upper_p">Month</p>
 		<p class="upper_p">Date</p>
 	</div>
-	<select id="abc" onchange="getYear(this)"></select>
+	<select id="sel_year" onchange="getYear(this)"></select>
 
-	<select id="def" onchange="getMonth(this)">
+	<select id="sel_month" onchange="getMonth(this)">
 		<option value="1">January</option>
 		<option value="2">February</option>
 		<option value="3">March</option>
@@ -29,7 +29,7 @@
 		<option value="12">December</option>
 	</select>
 
-	<select id="ghi" onchange="getDate(this)"></select>
+	<select id="sel_date" onchange="getDate(this)"></select>
 	<div id="div_print">
 	</div>
 </div>
@@ -39,7 +39,7 @@
 	p = new Date();
     var max = 1900,
     min = p.getFullYear(),
-    select = document.getElementById('abc');
+    select = document.getElementById('sel_year');
 
     for (var i = min; i>=max; i--){
        var opt = document.createElement('option');
@@ -48,20 +48,20 @@
        select.appendChild(opt);
     }
 	
-    function getYear(abc) {
-        var selectedText = abc.options[abc.selectedIndex].innerHTML;
-        var selectedValue = abc.value;
+    function getYear(sel_year) {
+        var selectedText = sel_year.options[sel_year.selectedIndex].innerHTML;
+        var selectedValue = sel_year.value;
 		year = selectedValue;
-		document.getElementById('def').style.display= 'block';
-		document.getElementById('ghi').style.display= 'none';		
+		document.getElementById('sel_month').style.display= 'block';
+		document.getElementById('sel_date').style.display= 'none';		
 		document.getElementById('div_print').innerHTML="";		
 	}
 	
-	function getMonth(def) {
-		var selectedMonth = def.options[abc.selectedIndex].innerHTML;
-        var selectedMonthValue = def.value;
+	function getMonth(sel_month) {
+		var selectedMonth = sel_month.options[sel_month.selectedIndex].innerHTML;
+        var selectedMonthValue = sel_month.value;
 		month = selectedMonthValue;
-		change=document.getElementById('ghi');
+		change=document.getElementById('sel_date');
 		change.style.display= 'block';
 		document.getElementById('div_print').innerHTML="";
 		change.innerHTML="";
@@ -102,12 +102,12 @@
 						   var opt = document.createElement('option');
 						   opt.value = i;
 						   opt.innerHTML = i;
-						   ghi.appendChild(opt);
+						   sel_date.appendChild(opt);
 						}
 	}
-	function getDate(ghi){
-		var selectedDate = ghi.options[ghi.selectedIndex].innerHTML;
-        var selectedDateValue = ghi.value;
+	function getDate(sel_date){
+		var selectedDate = sel_date.options[sel_date.selectedIndex].innerHTML;
+        var selectedDateValue = sel_date.value;
 		date= selectedDateValue;
 		if(leap == 1 ){
 		document.getElementById('div_print').innerHTML= "The date entered is : "+ date +"/"+month+"/"+ year+"<br> This is a leap year.";
