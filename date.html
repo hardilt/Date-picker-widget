@@ -1,0 +1,121 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/date.css">
+</head>
+<header>
+	<h1>Date Picker Widget<h1>
+</header>
+<body>
+<div class="main">
+	<div class="upper"> 
+		<p class="upper_p">Year</p>
+		<p class="upper_p">Month</p>
+		<p class="upper_p">Date</p>
+	</div>
+	<select id="abc" onchange="getYear(this)"></select>
+
+	<select id="def" onchange="getMonth(this)">
+		<option value="1">January</option>
+		<option value="2">February</option>
+		<option value="3">March</option>
+		<option value="4">April</option>
+		<option value="5">May</option>
+		<option value="6">June</option>
+		<option value="7">July</option>
+		<option value="8">August</option>
+		<option value="9">September</option>
+		<option value="10">October</option>
+		<option value="11">November</option>
+		<option value="12">December</option>
+	</select>
+
+	<select id="ghi" onchange="getDate(this)"></select>
+	<div id="div_print">
+	</div>
+</div>
+</body>
+<script>
+
+	p = new Date();
+    var max = 1900,
+    min = p.getFullYear(),
+    select = document.getElementById('abc');
+
+    for (var i = min; i>=max; i--){
+       var opt = document.createElement('option');
+       opt.value = i;
+       opt.innerHTML = i;
+       select.appendChild(opt);
+    }
+	
+    function getYear(abc) {
+        var selectedText = abc.options[abc.selectedIndex].innerHTML;
+        var selectedValue = abc.value;
+		year = selectedValue;
+		document.getElementById('def').style.display= 'block';
+		document.getElementById('ghi').style.display= 'none';		
+		document.getElementById('div_print').innerHTML="";		
+	}
+	
+	function getMonth(def) {
+		var selectedMonth = def.options[abc.selectedIndex].innerHTML;
+        var selectedMonthValue = def.value;
+		month = selectedMonthValue;
+		change=document.getElementById('ghi');
+		change.style.display= 'block';
+		document.getElementById('div_print').innerHTML="";
+		change.innerHTML="";
+		min=1;
+			if(month == 2)
+			{	
+				if(year % 400 != 0 && year % 100 ==0 )
+				{
+					max=28;
+					leap=0;
+				}
+				else if(year % 400 == 0 || year % 4 ==0)
+				{
+					max=29;
+					leap=1;
+				}
+				else
+				{
+					max=28;
+					leap=0;
+				}
+			}
+			else if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+				{
+					max=31;
+					if(year % 400 != 0 && year % 100 ==0 ){leap=0;}
+					else if(year % 400 == 0 || year % 4 ==0){leap=1;}
+					else{leap=0;}
+				}
+			else
+				{
+					max= 30;
+					if(year % 400 != 0 && year % 100 ==0 ){leap=0;}
+					else if(year % 400 == 0 || year % 4 ==0){leap=1;}
+					else{leap=0;}
+				}
+			for (var i = min; i<=max; i++){
+						   var opt = document.createElement('option');
+						   opt.value = i;
+						   opt.innerHTML = i;
+						   ghi.appendChild(opt);
+						}
+	}
+	function getDate(ghi){
+		var selectedDate = ghi.options[ghi.selectedIndex].innerHTML;
+        var selectedDateValue = ghi.value;
+		date= selectedDateValue;
+		if(leap == 1 ){
+		document.getElementById('div_print').innerHTML= "The date entered is : "+ date +"/"+month+"/"+ year+"<br> This is a leap year.";
+		}
+		else
+		{
+		document.getElementById('div_print').innerHTML= "The date entered is : "+ date +"/"+month+"/"+ year+"<br> This is 'not' a leap year.";
+		}
+	}
+</script>
+</html>

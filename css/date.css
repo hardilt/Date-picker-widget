@@ -1,0 +1,40 @@
+
+body{
+background:#d4d7db;
+}
+.main{
+background-color:cyan;
+width:307px;
+height:auto;
+overflow:hidden;
+margin-left:50%;
+transform:translateX(-50%);
+border-radius:10px;
+}
+#def,#ghi{
+	display:none;
+}
+select{
+	float:left;
+	margin:11px;
+	border-radius:5px;
+	border-color:blue;
+	padding:10px;
+}
+.upper,#div_print{
+	overflow:hidden;
+}
+#div_print{
+width:100%;
+height:auto;
+text-align:center;
+}
+.upper_p{
+float:left;
+margin:20px 34px 0px;
+}
+h1{
+margin-left:50%;
+margin-top:5%;
+transform:translateX(-20%);
+}
