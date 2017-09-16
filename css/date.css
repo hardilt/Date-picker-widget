@@ -11,7 +11,7 @@ margin-left:50%;
 transform:translateX(-50%);
 border-radius:10px;
 }
-#def,#ghi{
+#sel_date,#sel_month{
 	display:none;
 }
 select{
