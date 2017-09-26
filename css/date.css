@@ -10,15 +10,55 @@ overflow:hidden;
 margin-left:50%;
 transform:translateX(-50%);
 border-radius:10px;
+float:left;
+padding:10px;
 }
-#sel_date,#sel_month{
+.months{
+width:240px;
+height:213px;
+margin:5px;
+background:white;
+float:left;
+}
+.week{
+width:240px;
+height:30px;
+background:#d7dbe2;
+}
+.week td{
+border:2px solid white;
+border-radius:5px;	
+width:28px;
+text-align:center;
+}
+.month_label{
+text-align:center;
+    height: 24px;
+    font-size: 20px;
+}
+#date_1,#date_2{
+border-radius:5px;
+}
+
+
+#picker{
 	display:none;
+	width:500px;
+	height:230px;
+	overflow:hidden;
 }
-select{
+#inner,#inner_1{
+	text-align:center;
 	float:left;
-	margin:11px;
+}
+#def,#ghi{
+	height:15px;
+}
+.default{
+	float:left;
+	margin:20px;
 	border-radius:5px;
-	border-color:blue;
+	background:white;
 	padding:10px;
 }
 .upper,#div_print{
