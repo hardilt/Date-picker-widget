@@ -1,6 +1,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="css/date.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <header>
 	<h1>Date Picker Widget<h1>
@@ -8,114 +9,132 @@
 <body>
 <div class="main">
 	<div class="upper"> 
-		<p class="upper_p">Year</p>
 		<p class="upper_p">Month</p>
 		<p class="upper_p">Date</p>
 	</div>
-	<select id="sel_year" onchange="getYear(this)"></select>
 
-	<select id="sel_month" onchange="getMonth(this)">
-		<option value="1">January</option>
-		<option value="2">February</option>
-		<option value="3">March</option>
-		<option value="4">April</option>
-		<option value="5">May</option>
-		<option value="6">June</option>
-		<option value="7">July</option>
-		<option value="8">August</option>
-		<option value="9">September</option>
-		<option value="10">October</option>
-		<option value="11">November</option>
-		<option value="12">December</option>
-	</select>
+	<div class="default" id="def"></div>
 
-	<select id="sel_date" onchange="getDate(this)"></select>
-	<div id="div_print">
+	<div class="default" id="ghi"></div>
+	
+	<div class="default" style="text-align:center;">
+	<i class="fa fa-calendar" onclick="drop(this)" aria-hidden="true"></i>
+	</div>
+	
+</div>
+
+<div class="main" id="picker" >
+	<div class="months">
+		<div class="month_label" id="first_mon">
+			
+		</div>
+		<div class="week" id="inner">
+			<table>
+				<tr>
+					<td>su</td>
+					<td>mo</td>
+					<td>tu</td>
+					<td>we</td>
+					<td>th</td>
+					<td>fr</td>
+					<td>sa</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="months">
+		<div class="month_label" id="second_mon">
+			
+		</div>
+		<div class="week" id="inner_1" >
+			<table>
+				<tr>
+					<td>su</td>
+					<td>mo</td>
+					<td>tu</td>
+					<td>we</td>
+					<td>th</td>
+					<td>fr</td>
+					<td>sa</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </div>
 </body>
 <script>
-
+	
+	function drop(cal){
+		var x = document.getElementById('picker');
+		if (x.style.display === 'none') {
+			x.style.display = 'block';
+		} else {
+			x.style.display = 'none';
+		}
+	}
 	p = new Date();
-    var max = 1900,
-    min = p.getFullYear(),
-    select = document.getElementById('sel_year');
-
-    for (var i = min; i>=max; i--){
-       var opt = document.createElement('option');
-       opt.value = i;
-       opt.innerHTML = i;
-       select.appendChild(opt);
-    }
-	
-    function getYear(sel_year) {
-        var selectedText = sel_year.options[sel_year.selectedIndex].innerHTML;
-        var selectedValue = sel_year.value;
-		year = selectedValue;
-		document.getElementById('sel_month').style.display= 'block';
-		document.getElementById('sel_date').style.display= 'none';		
-		document.getElementById('div_print').innerHTML="";		
-	}
-	
-	function getMonth(sel_month) {
-		var selectedMonth = sel_month.options[sel_month.selectedIndex].innerHTML;
-        var selectedMonthValue = sel_month.value;
-		month = selectedMonthValue;
-		change=document.getElementById('sel_date');
-		change.style.display= 'block';
-		document.getElementById('div_print').innerHTML="";
-		change.innerHTML="";
-		min=1;
-			if(month == 2)
-			{	
-				if(year % 400 != 0 && year % 100 ==0 )
-				{
-					max=28;
-					leap=0;
-				}
-				else if(year % 400 == 0 || year % 4 ==0)
-				{
-					max=29;
-					leap=1;
-				}
-				else
-				{
-					max=28;
-					leap=0;
-				}
-			}
-			else if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-				{
-					max=31;
-					if(year % 400 != 0 && year % 100 ==0 ){leap=0;}
-					else if(year % 400 == 0 || year % 4 ==0){leap=1;}
-					else{leap=0;}
-				}
-			else
-				{
-					max= 30;
-					if(year % 400 != 0 && year % 100 ==0 ){leap=0;}
-					else if(year % 400 == 0 || year % 4 ==0){leap=1;}
-					else{leap=0;}
-				}
-			for (var i = min; i<=max; i++){
-						   var opt = document.createElement('option');
-						   opt.value = i;
-						   opt.innerHTML = i;
-						   sel_date.appendChild(opt);
-						}
-	}
-	function getDate(sel_date){
-		var selectedDate = sel_date.options[sel_date.selectedIndex].innerHTML;
-        var selectedDateValue = sel_date.value;
-		date= selectedDateValue;
-		if(leap == 1 ){
-		document.getElementById('div_print').innerHTML= "The date entered is : "+ date +"/"+month+"/"+ year+"<br> This is a leap year.";
+	var month = p.getMonth(),
+        year = p.getFullYear();
+		
+		var monthName = new Array();
+		monthName[0] = "January";
+		monthName[1] = "February";
+		monthName[2] = "March";
+		monthName[3] = "April";
+		monthName[4] = "May";
+		monthName[5] = "June";
+		monthName[6] = "July";
+		monthName[7] = "August";
+		monthName[8] = "September";
+		monthName[9] = "October";
+		monthName[10] = "November";
+		monthName[11] = "December";
+		var monName = document.getElementById('first_mon');
+		monName.innerHTML = monthName[month];
+		var monName = document.getElementById('second_mon');
+		monName.innerHTML = monthName[month+1];
+			
+		
+    var FirstDay = new Date(year, month, 1);
+		today= FirstDay.getDay();
+		today=today+1;
+		sel = document.getElementById('inner');
+		var j=1;
+	for (var i = 1; i<=35; i++){
+		   var opt = document.createElement('div');
+		   opt.value = i;
+		   opt.style.float='left';
+		   opt.style.width = '30px';
+		   opt.style.height = '28px';
+		   opt.style.border= '2px solid white';
+		   opt.id='date_1';
+		   opt.onclick = 'google.com' ;
+		   if(opt.value >= today)
+		   {
+				opt.innerHTML=j;
+				j++;
+		   }
+		   else{
+				opt.innerHTML='';
+		   }
+		   opt.style.background= '#eaeff7';
+		   sel.appendChild(opt);
 		}
-		else
-		{
-		document.getElementById('div_print').innerHTML= "The date entered is : "+ date +"/"+month+"/"+ year+"<br> This is 'not' a leap year.";
+		sel = document.getElementById('inner_1');
+	for (var i = 1; i<=31; i++){
+		   var opt = document.createElement('div');
+		   opt.value = i;
+		   opt.style.float='left';
+		   opt.style.width = '30px';
+		   opt.style.height = '28px';
+		   opt.style.border= '2px solid white';
+		   opt.id='date_2';
+		   opt.style.background= '#eaeff7';
+		   opt.innerHTML = i;
+		   sel.appendChild(opt);
 		}
-	}
+	
+		document.getElementById('def').innerHTML=monthName[month];
+		document.getElementById('ghi').innerHTML=p.getDate();
 </script>
 </html>
